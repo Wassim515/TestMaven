@@ -7,6 +7,8 @@ public class User {
     private int height; 
     private int age;    
     private double currentScore; 
+    
+
     private LocalDate lastRunDate;
 
     public User(int weight, int height, int age) {
@@ -17,9 +19,9 @@ public class User {
         this.lastRunDate = null;
     }
 
-       //Getter och Setter 
-       public int getHeight() {
-        return height;
+       
+    public int getHeight() {
+      return height;
     }
 
     public void setHeight(int height){
@@ -45,13 +47,16 @@ public class User {
     public double getCurrentScore() {
         return currentScore;
     }
-       
-    public int daysSinceLastrun(){
-        if (lastRunDate == null) {
-            return 0;
+    
+    public void setCurrentScore(double currentScore) {
+        this.currentScore = currentScore;
+    }   
+    public long daysSinceLastrun(){
+         if (lastRunDate == null) {
+         return 0;
         }
-        return (int) ChronoUnit.DAYS.between(lastRunDate, LocalDate.now());
-
+        LocalDate today = LocalDate.now();
+        return ChronoUnit.DAYS.between(lastRunDate, today);
     }
 
     public LocalDate setLastRunDate(LocalDate lastRunDate) {
@@ -61,21 +66,20 @@ public class User {
 
     }
 
-    public double calFitness (double currentScore){
-        TrailRunner run = new TrailRunner(null, currentScore, weight, height, age, lastRunDate);
-        double score = currentScore + (run.getDistance() + run.calculateSpeed() / run.calculatePace()) - daysSinceLastrun() / 2;
-        currentScore +=  Math.max(score, 0);
-        return currentScore;
+    public double calculateFitnessScore(Run run, TrailRunner runner) {
+   
+      if (run.database.isEmpty()) {
+        return 0;
+       }
+
+       double fitnessScore = currentScore + 
+      (runner.getDistance() + (runner.calculateSpeed() / runner.calculatePace())) - (daysSinceLastrun() / 2.0);
+
+      currentScore = Math.max(fitnessScore, 0);
+      return currentScore; 
 
     }
 
-   
-public int calculateFitnessScore(double distance, double avgSpeed, double kilometerPace){
-    double fitnessScore = (distance * avgSpeed) / kilometerPace;
-
-return Math.max(0, (int) fitnessScore);
-
-}
 
 
 }

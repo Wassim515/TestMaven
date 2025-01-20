@@ -27,7 +27,6 @@
 
     <build>
         <plugins>
-            <!-- JaCoCo plugin for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -35,8 +34,8 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>prepare-agent</goal>  <!-- Förbereder agenten för täckningsrapport -->
-                            <goal>report</goal>        <!-- Skapar rapporten -->
+                            <goal>prepare-agent</goal>  
+                            <goal>report</goal>        
                         </goals>
                     </execution>
                 </executions>

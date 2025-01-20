@@ -15,7 +15,6 @@ public class TrailRunnerTest {
              new TrailRunner(null,5.0, 1,0, 30, LocalDate.now());
         });
     }
-
   
 
     @Test
@@ -53,18 +52,14 @@ public class TrailRunnerTest {
             new TrailRunner("Run1", -5.0, 1, 0, 30, LocalDate.now());
         });
     }
-
-   /*  @Test
-    void testDuplicaterunsId() {
+    
+    @Test
+    void testIfAllTimesIsZero() {
         
-        TrailRunner trailRunner = new TrailRunner("Run1", 5.0, 1, 30, 30, LocalDate.now());
-
-        assertThrows(IllegalArgumentException.class, () -> {
-                new TrailRunner("Run1", 6.0, 2, 0, 40, LocalDate.now());
+         assertThrows(IllegalArgumentException.class, () -> {
+            new TrailRunner("Run10", 10, 0, 0, 0, LocalDate.now());
         });
-        
-    }*/
-
+    }
     
     @Test
     void TrailRunTestDistance() {
@@ -104,23 +99,42 @@ public class TrailRunnerTest {
     void RunTestmin() {  
         int min = 6;
         
-        TrailRunner run = new TrailRunner("run1" , 2, 4, 50, min, LocalDate.now());
+        TrailRunner run = new TrailRunner("run1" , 2, 4, min, 20, LocalDate.now());
 
         assertEquals(min, run.getMin());
 
 
-}
+    }
 
-
-@Test
-void RunTestdate() {
+    @Test
+    void RunTestdate() {
     
-    LocalDate date = LocalDate.now();
-    TrailRunner run = new TrailRunner("run", 1, 5, 3, 0, LocalDate.now());
+     LocalDate date = LocalDate.now();
+     TrailRunner run = new TrailRunner("run", 1, 5, 3, 0, LocalDate.now());
     
-    assertEquals(date,run.getDate());
+     assertEquals(date,run.getDate());
 
-}
+    }
+
+    @Test
+    public void testCalculateSpeed(){
+        TrailRunner run = new TrailRunner("Run", 7, 1, 0, 0, LocalDate.now());
+
+        double expectedResult = 7.0 / 1.0;
+
+        assertEquals(expectedResult, run.calculateSpeed());
+    }
+
+    @Test 
+    public void testCalculatePace(){
+        TrailRunner run = new TrailRunner("Run20", 4, 0, 30, 0, LocalDate.now());
+
+        double expectedResult = 30.0 / 4.0;
+
+        assertEquals(expectedResult, run.calculatePace());
+    }
+
+
 }
 
  
